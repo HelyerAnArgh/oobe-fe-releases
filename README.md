@@ -85,6 +85,11 @@ Plug an Android phone in and the cable becomes a themed, sortable, thumbnailed f
 
 Two ways in, and it picks for itself.
 
+> [!NOTE]
+> **MTP** is what Windows already uses when you plug a phone in and it appears in File Explorer. Nothing to install, and it is on every machine. The catch is that it reads the phone's **media database** rather than the filesystem, so anything the phone has not indexed can simply refuse to appear.
+>
+> **ADB** is Google's own Android Debug Bridge, the tool Android development is built on. It reads the **filesystem directly**, which is why it is faster, sees files that are not media, and never goes stale.
+
 | | MTP | ADB |
 |---|---|---|
 | Needs setting up | Nothing at all | Platform tools on the PC, USB debugging on the phone |

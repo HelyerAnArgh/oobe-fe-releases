@@ -22,7 +22,7 @@ Every one of them does a real job on real files, says what it measured rather th
 | **OOBE:Nd N42** | Android 9 or later | [oobe-fe-mobile-releases](https://github.com/HelyerAnArgh/oobe-fe-mobile-releases/releases) |
 
 > [!TIP]
-> **The phone build lives in its own repository now.** Everything mobile is at [oobe-fe-mobile-releases](https://github.com/HelyerAnArgh/oobe-fe-mobile-releases), including its own downloads, notes and updates.
+> **The phone build lives in its own repository now.** Everything mobile is at [oobe-fe-mobile-releases](https://github.com/HelyerAnArgh/oobe-fe-mobile-releases), including its own downloads, notes, scans and updates.
 
 ---
 
@@ -121,10 +121,9 @@ Every build gets put through VirusTotal and the result is kept here, so it can b
 | Build | Result | Report |
 |---|---|---|
 | **OOBE:Fe Lite 0.1.10** | 1 detection, 66 clean | [`aa30d450...`](https://www.virustotal.com/gui/file/aa30d45011d21c184d7e3e0aab4155f8f69dadf8ae05a6073a2216b8a1590ee9) |
-| **OOBE:Nd N42 0.1.1** | **0 detections**, 68 clean | [`445d76b1...`](https://www.virustotal.com/gui/file/445d76b1a44e103698fedb3f526aca99e4e2a9bdd8d158281b5230e3379143ea) |
 
 > [!NOTE]
-> **The one detection is Microsoft's `Trojan:Win32/Wacatac.B!ml`, and the `!ml` on the end is the whole story.** It marks a verdict reached by a machine learning model rather than a signature match, and it is the ordinary result for an installer that is newly built, carries no code signing certificate, and has been downloaded so far by almost nobody. **Nothing else agrees with it.** Sixty six engines return nothing, and the Android build is flagged by none at all.
+> **The one detection is Microsoft's `Trojan:Win32/Wacatac.B!ml`, and the `!ml` on the end is the whole story.** It marks a verdict reached by a machine learning model rather than a signature match, and it is the ordinary result for an installer that is newly built, carries no code signing certificate, and has been downloaded so far by almost nobody. **Nothing else agrees with it.** Sixty six engines return nothing.
 >
 > It is named here rather than left off, because one heuristic hit with the engine and the reason attached tells you more than a clean looking badge does.
 
@@ -132,15 +131,10 @@ Check that what you downloaded is the file that was scanned:
 
 ```
 Lite 0.1.10   aa30d45011d21c184d7e3e0aab4155f8f69dadf8ae05a6073a2216b8a1590ee9
-N42  0.1.1    445d76b1a44e103698fedb3f526aca99e4e2a9bdd8d158281b5230e3379143ea
 ```
 
 ```powershell
 Get-FileHash .\OOBE-Fe-Lite_0.1.10_x64-setup.exe -Algorithm SHA256
-```
-
-```bash
-sha256sum OOBE-Nd-N42-0.1.1.apk
 ```
 
 ---

@@ -53,12 +53,43 @@ Every one of them does a real job on real files, says what it measured rather th
 
 ### Ge, this machine
 
-Where the disk space actually went, with duplicates found rather than implied.
+The brief was WinDirStat but better, so the design is mostly a list of things WinDirStat gets wrong.
+
+| Fault | What it costs you | What Ge does |
+|---|---|---|
+| **Follows junctions** | `C:\Users\All Users` points at `C:\ProgramData`, so it is counted twice, and a junction pointing at an ancestor never finishes | Reparse points are detected, counted where they stand, and never entered |
+| **Gives up past 260 characters** | Deep paths are silently missing from the total | Roots become verbatim paths, which lifts the limit for everything beneath them |
+| **Hides what it could not read** | A denied system folder simply is not in the number, with nothing saying so | Denials are counted and shown |
+| **Single threaded** | A walk is almost pure waiting on the disk, so one thread leaves most of it idle | A pool of workers over a shared queue |
+
+On a real profile that is **1,840,522 files across 298,166 directories, 414.65 GB, in 62.3 seconds**. About 29,500 files a second, with **77 junctions found and not followed** and **16 denied directories counted rather than quietly dropped**.
+
+> [!TIP]
+> **The duplicate finder does not hash, and that is the point.** Three stages, each more expensive than the last so the costly one only sees what survived: file size, then the first 8 kB, then **every byte**. A hash answers a subtly different question, *these files probably match*, with a collision chance nobody ever puts on screen. There is going to be a delete button next to this answer one day, and "probably identical" is not a basis for deleting somebody's file.
+
+**The empty folder finder has one genuinely dangerous case**, so it is handled explicitly: a folder holding nothing but a junction has a file count of zero and is not remotely empty. Only the topmost folder of a nest is reported, with a count of what is under it, because a build tree left behind as three hundred nested empty folders is one thing to deal with rather than three hundred.
+
+**The machine readout is read, never computed.** Windows version, processor, memory, graphics adapters, uptime, and every physical disk mapped to the volumes actually on it, because *which disk is C: really on* is the question a storage tool gets asked. No WMI anywhere, and it needs no administrator.
 
 ### Li, a plugged in phone
 
+Plug an Android phone in and the cable becomes a themed, sortable, thumbnailed file browser that can answer "what on earth is eating my storage".
+
 > [!IMPORTANT]
-> **Read only, permanently.** Nothing is written, moved or deleted on a connected handset. Ever.
+> **Read only, permanently.** There is exactly one transfer in the whole module and it goes one way, phone to PC. No delete, no rename, no push. That is a deliberate boundary rather than an unfinished feature: a half built file explorer is the last thing that should be allowed to delete anything.
+
+Two ways in, and it picks for itself.
+
+| | MTP | ADB |
+|---|---|---|
+| Needs setting up | Nothing at all | Platform tools on the PC, USB debugging on the phone |
+| Sees files that are not media | Only if indexed | Yes |
+| Whole phone scan | 94 seconds | **3.5 seconds** |
+
+MTP is the baseline because it is always there. ADB is optional and auto detected and only ever makes things better, so it still works on a machine that has never heard of the Android SDK, and if ADB is present but fails it falls back and tells you which one answered.
+
+> [!NOTE]
+> **It refuses to lie about coverage.** Every scan carries the phone's own reported usage as an independent check, and explains the gap: installed apps and app private data cannot be read over USB without root, which is expected rather than a hole in the scan. A separate warning appears **only when folders genuinely refused to open**, because a partial scan presented as a complete one is worse than an error, and a warning that fires every time teaches you to skip reading it.
 
 ---
 

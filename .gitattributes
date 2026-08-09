@@ -1,0 +1,3 @@
+# The banner is authored with LF endings. Without this a Windows clone
+# rewrites all 200 of them to CRLF and every re-commit churns the whole file.
+*.svg text eol=lf

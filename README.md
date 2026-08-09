@@ -28,6 +28,11 @@ Every one of them does a real job on real files, says what it measured rather th
 
 ## OOBE:Fe Lite
 
+<p align="center">
+  <img src="https://github.com/HelyerAnArgh/oobe-fe-releases/releases/download/media/ore-lite-demo.webp" width="900" alt="OOBE:Fe Lite measuring a music library">
+  <br><sub>Example image. The library shown is generated, not a real collection.</sub>
+</p>
+
 | Module | Does |
 |---|---|
 | **Nd** | Plays your music, and measures it |

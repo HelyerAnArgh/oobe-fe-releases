@@ -56,6 +56,11 @@ Every one of them does a real job on real files, says what it measured rather th
 
 **Deep listening statistics**, including a weekday by hour heatmap of 168 cells, because *when* you listen is a two dimensional fact and one line of totals throws half of it away.
 
+**A light synth, not a screensaver.** Thirteen effects, four feedback modes and five palettes, every combination tuned rather than left to chance, and the whole thing swept at 144 frames a second before it shipped. The beat is felt, not guessed: **sparks fire on a kick and snare detector** tuned on real recordings with every hit marked, so a chord stab no longer sets off fireworks. Two dials set the light and how hard it reacts, a song can keep its own look, and the picture pops out into a window of its own for full screen on a second monitor.
+
+> [!TIP]
+> **Planets is the one to try first.** An orrery whose sun wears the live spectrum as 48 rays, with orbits that surge forward on every beat. Switch the feedback to draw in and every planet sheds a wake into the sun.
+
 ### Ge, this machine
 
 The brief was WinDirStat but better, so the design is mostly a list of things WinDirStat gets wrong.
@@ -125,21 +130,19 @@ Every build gets put through VirusTotal and the result is kept here, so it can b
 
 | Build | Result | Report |
 |---|---|---|
-| **OOBE:Fe Lite 0.1.10** | 1 detection, 66 clean | [`aa30d450...`](https://www.virustotal.com/gui/file/aa30d45011d21c184d7e3e0aab4155f8f69dadf8ae05a6073a2216b8a1590ee9) |
+| **OOBE:Fe Lite 0.1.12** | **0 detections**, 67 engines | [`9c1ef8a4...`](https://www.virustotal.com/gui/file/9c1ef8a4c11911653313a8d208b0150b825ff7703c9d97aacb3feeafd7d2c5e3) |
 
 > [!NOTE]
-> **The one detection is Microsoft's `Trojan:Win32/Wacatac.B!ml`, and the `!ml` on the end is the whole story.** It marks a verdict reached by a machine learning model rather than a signature match, and it is the ordinary result for an installer that is newly built, carries no code signing certificate, and has been downloaded so far by almost nobody. **Nothing else agrees with it.** Sixty six engines return nothing.
->
-> It is named here rather than left off, because one heuristic hit with the engine and the reason attached tells you more than a clean looking badge does.
+> **Clean, and that was not always the case.** 0.1.10 drew one hit, Microsoft's `Trojan:Win32/Wacatac.B!ml`, where the `!ml` marks a machine learning guess rather than a signature match: the ordinary result for a new installer with no code signing certificate that almost nobody has downloaded yet. 0.1.12 drew none, Microsoft included. If a future build draws that guess again, it will be named here rather than left off.
 
 Check that what you downloaded is the file that was scanned:
 
 ```
-Lite 0.1.10   aa30d45011d21c184d7e3e0aab4155f8f69dadf8ae05a6073a2216b8a1590ee9
+Lite 0.1.12   9c1ef8a4c11911653313a8d208b0150b825ff7703c9d97aacb3feeafd7d2c5e3
 ```
 
 ```powershell
-Get-FileHash .\OOBE-Fe-Lite_0.1.10_x64-setup.exe -Algorithm SHA256
+Get-FileHash .\OOBE-Fe-Lite_0.1.12_x64-setup.exe -Algorithm SHA256
 ```
 
 ---
